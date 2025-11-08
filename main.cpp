@@ -14,6 +14,10 @@ struct Node{
         childLeft = nullptr;
         childRight = nullptr;
     }
+    ~Node(){
+        delete childLeft;
+        delete childRight;
+    }
 };
 
 Node* recursive_insert(Node* r, int val){
@@ -85,6 +89,18 @@ void preOrder(Node* r){
     preOrder(r->childLeft);
     preOrder(r->childRight);
 }
+void inOrder(Node* r){
+    if (r == nullptr) return;
+    inOrder(r->childLeft);
+    cout << r->value << " ";
+    inOrder(r->childRight);
+}
+void postOrder(Node* r){
+    if (r == nullptr) return;
+    postOrder(r->childLeft);
+    postOrder(r->childRight);
+    cout << r->value << " ";
+}
 
 int main(){
     Node* n = new Node(5);
@@ -105,5 +121,10 @@ int main(){
     t = recursive_search(n, 2);
     if (t!= nullptr) cout << recursive_search(n, 2)->value << endl;
     preOrder(n);
+    cout << endl << endl;
+    inOrder(n);
+    cout << endl << endl;
+    postOrder(n);
+    cout << endl << endl;
     return 0;
 }
